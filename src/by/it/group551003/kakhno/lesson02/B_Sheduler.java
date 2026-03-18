@@ -32,7 +32,19 @@ public class B_Sheduler {
         List<Event> result;
         result = new ArrayList<>();
         //ваше решение.
+        java.util.Arrays.sort(events, (a, b) -> {
+            if (a.stop != b.stop)
+                return a.stop - b.stop;
+            return a.start - b.start;
+        });
 
+        int currTime;
+        currTime = from;
+        for (Event event : events)
+            if (event.start >= currTime && event.stop <= to) {
+                result.add(event);
+                currTime = event.stop;
+            }
 
         return result;          //вернем итог
     }
